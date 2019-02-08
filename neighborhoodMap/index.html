@@ -1,0 +1,65 @@
+
+<!doctype html>
+<html lang="en" data-framework="backbonejs">
+	<head>
+		<meta charset="utf-8">
+        <title>Neighbourhood app</title>
+        <link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+        <header class="header">
+            <div class="container_title">
+                <div class="header_title">
+                    <h1>My Favourite Restaurant's Locations</h1>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <div class="options-box">
+                <div style="height:100%;">
+                    <nav id="navigation" role="navigation">
+                        <div id="menuToggle">
+                            <!--
+                            A fake / hidden checkbox is used as click reciever,
+                            so you can use the :checked selector on it.
+                            -->
+                            <input type="checkbox" />
+                            <!--    Made by Erik Terwan    -->
+                            <!--   24th of November 2015   -->
+                            <!--        MIT License        -->
+                            <!--
+                            Some spans to act as a hamburger.
+                            They are acting like a real hamburger,
+                            not that McDonalds stuff.
+                            -->
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <!--
+                            Too bad the menu has to be inside of the button
+                            but hey, it's pure CSS magic.
+                            -->
+                            <ul id="menu">
+                                    <input class="filter" type="text" data-bind="textInput: filter" placeholder="Search for restaurants.." title="Type in a restaurant">
+                                <div data-bind="foreach: filteredLocations">
+                                    <a data-bind="click: $parent.openMarker.bind($data, $index(), $data)" href="#"><li data-bind="text: title"></li></a>
+                                </div>
+                                <!-- Error Handling -->
+                                <div class="norestaurants" data-bind='visible: filteredLocationsIsEmpty'>
+                                    Sorry, no restaurants fullfil your request
+                                </div>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class = "map-box">
+                <!-- Create a place to put the map in the HTML-->
+                <div id="map"></div>
+            </div>
+        <script src="bower_components/knockout/dist/knockout.debug.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/maps.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,drawing&key=AIzaSyBUwISFcczaq3ZmyiwWq89CFVKiqHlpI78&v=3&callback=initMap"></script>
+	</body>
+</html>
